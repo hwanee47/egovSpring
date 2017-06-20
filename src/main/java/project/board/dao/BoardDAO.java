@@ -14,4 +14,16 @@ public class BoardDAO extends EgovAbstractMapper{
 		return list("board.list", boardVO);
 	}
 
+	public int insert(BoardVO boardVO) throws Exception{
+		return insert("board.insert", boardVO);
+	}
+
+	public BoardVO updateView(BoardVO boardVO) throws Exception{
+		return (BoardVO)selectByPk("board.updateView", boardVO);
+	}
+
+	public int update(BoardVO boardVO) {
+		return update("board.update", boardVO);
+	}
+
 }

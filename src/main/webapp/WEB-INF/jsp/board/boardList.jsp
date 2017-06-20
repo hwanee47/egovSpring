@@ -3,30 +3,45 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>게시판페이지</title>
+<title>게시판페이지</title>
 </head>
-
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#write').click(function(){
+		location.href="/board/insert.do";
+	});
+});
+function select(no){
+	location.href="/board/update.do?no="+no;
+}
+</script>
 <body>
+<form name="form" id="form" method="post">
 <table>
-	<thead></thead>
-	<thead></thead>
-	<thead></thead>
-	<thead></thead>
+	<thead>번호</thead>
+	<thead>제목</thead>
+	<thead>내용</thead>
+	<thead>날짜</thead>
 	<tbody>
+		<c:forEach var="list" items="${list}">
 		<tr>
-			<c:forEach var="list" items="${list}">
-				<td>${list.no}</td>
-				<td>${list.subject}</td>
-				<td>${list.content}</td>
-				<td>${list.creatEd}</td>
-			</c:forEach>
+			<input type="hidden" name="no" />
+			<td>${list.no}</td>
+			<td><a href="javascript:select('<c:out value="${list.no}"/>')"><c:out value="${list.subject}"/></a></td>
+			<td>${list.content}</td>
+			<td>${list.creatEd}</td>
+		</tr>
+		</c:forEach>
+		<tr>
+			<td colspan="4" style="text-align: center;"><input type="button" value="글쓰기" id="write" ></td>
 		</tr>
 	</tbody>
 </table>
+</form>
 </body>
 </html>

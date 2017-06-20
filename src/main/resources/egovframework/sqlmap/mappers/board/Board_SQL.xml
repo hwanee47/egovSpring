@@ -10,4 +10,27 @@
 		FROM BOARD
 	</select>
 	
+	<insert id="insert" parameterType="boardVO">
+		INSERT INTO BOARD (SUBJECT, CONTENT, CREATED)
+		VALUES(#{subject}, #{content}, now())
+	</insert>
+	
+	<select id="updateView" resultType="boardVO">
+		select NO as no,
+			   SUBJECT as subject,
+			   CONTENT as content,
+			   CREATED as creatEd
+		FROM BOARD
+		WHERE NO = #{no}
+	</select>
+	
+	<update id="update" parameterType="boardVO">
+		UPDATE BOARD
+		SET SUBJECT = #{subject},
+			CONTENT = #{content}
+		WHERE NO = ${no}
+	</update>
+	
+	
+	
 </mapper>
