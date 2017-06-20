@@ -19,6 +19,10 @@ $(document).ready(function(){
 function select(no){
 	location.href="/board/update.do?no="+no;
 }
+function link_page(pageNo){
+	$('#pageIndex').val(pageNo);
+	$('#form').attr("action","/board/list.do").submit();
+}
 </script>
 <body>
 <form name="form" id="form" method="post">
@@ -42,6 +46,10 @@ function select(no){
 		</tr>
 	</tbody>
 </table>
+<div id="paging">
+	<ui:pagination paginationInfo = "${paginationInfo}" type="text" jsFunction="link_page" />
+	<input type="hidden" name="pageIndex" id="pageIndex" value="${searchVO.pageIndex}" />
+</div>
 </form>
 </body>
 </html>

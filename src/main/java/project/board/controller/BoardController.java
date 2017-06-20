@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import project.board.service.BoardService;
 import project.board.vo.BoardVO;
 import project.board.vo.SearchVO;
@@ -21,15 +22,35 @@ import project.board.vo.SearchVO;
 @RequestMapping(value= "/board")
 public class BoardController {
 	
+	public static final int pageUnit = 10;
+	public static final int pageSize = 10;
+
 	@Resource(name = "boardService")
 	private BoardService boardService;
 	
+	
 	@RequestMapping(value = "/list.do")
-	public String list(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model) throws Exception{
+	public String list(@ModelAttribute("searchVO") SearchVO searchVO, ModelMap model) throws Exception{
 		
-		List<BoardVO> list =  boardService.list(boardVO);
+		searchVO.setPageUnit(pageUnit);
+		searchVO.setPageSize(pageSize);
+
+		/** pageing setting */
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
+		paginationInfo.setPageSize(searchVO.getPageSize());
+
+		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+		
+		List<?> list =  boardService.list(searchVO);
 		model.addAttribute("list", list);
 		
+		int totCnt = boardService.ListTotCnt(searchVO);
+		paginationInfo.setTotalRecordCount(totCnt);
+		model.addAttribute("paginationInfo", paginationInfo);
 		return "board/boardList";
 	}
 	
@@ -43,7 +64,7 @@ public class BoardController {
 	public String insert(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model) throws Exception{
 		BoardVO BoardVO = new BoardVO();
 		int val = boardService.insert(boardVO);
-		return "redirect:/board/boardList";
+		return "redirect:/board/list.do";
 	}
 	
 	@RequestMapping(value="/update.do", method = RequestMethod.GET)
@@ -58,7 +79,13 @@ public class BoardController {
 	@RequestMapping(value="/update.do", method = RequestMethod.POST)
 	public String update(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model)throws Exception{
 		int val = boardService.update(boardVO);
-		return "redirect:/board/boardList";
+		return "redirect:/board/list.do";
+	}
+	
+	@RequestMapping(value="/delete.do", method = RequestMethod.POST)
+	public String delete(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model)throws Exception{
+		int val = boardService.delete(boardVO);
+		return "redirect:/board/list.do";
 	}
 
 	

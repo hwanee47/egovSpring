@@ -6,12 +6,17 @@ import org.springframework.stereotype.Repository;
 
 import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
 import project.board.vo.BoardVO;
+import project.board.vo.SearchVO;
 
 @Repository("boardDAO")
 public class BoardDAO extends EgovAbstractMapper{
 	
-	public List<BoardVO> list(BoardVO boardVO) throws Exception{
-		return list("board.list", boardVO);
+	public List<BoardVO> list(SearchVO searchVO) throws Exception{
+		return list("board.list", searchVO);
+	}
+	
+	public int ListTotCnt(SearchVO searchVO) {
+		return (int)selectByPk("board.ListTotCnt", searchVO);
 	}
 
 	public int insert(BoardVO boardVO) throws Exception{
@@ -25,5 +30,11 @@ public class BoardDAO extends EgovAbstractMapper{
 	public int update(BoardVO boardVO) {
 		return update("board.update", boardVO);
 	}
+
+	public int delete(BoardVO boardVO) {
+		return delete("board.delete", boardVO);
+	}
+
+	
 
 }

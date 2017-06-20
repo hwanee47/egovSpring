@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import project.board.dao.BoardDAO;
 import project.board.service.BoardService;
 import project.board.vo.BoardVO;
+import project.board.vo.SearchVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -17,8 +18,13 @@ public class BoardServiceImpl implements BoardService{
 	BoardDAO boardDAO;
 	
 	@Override
-	public List<BoardVO> list(BoardVO boardVO) throws Exception {
-		return boardDAO.list(boardVO);
+	public List<BoardVO> list(SearchVO searchVO) throws Exception {
+		return boardDAO.list(searchVO);
+	}
+	
+	@Override
+	public int ListTotCnt(SearchVO searchVO) throws Exception {
+		return boardDAO.ListTotCnt(searchVO);
 	}
 
 	@Override
@@ -35,5 +41,12 @@ public class BoardServiceImpl implements BoardService{
 	public int update(BoardVO boardVO) throws Exception {
 		return boardDAO.update(boardVO);
 	}
+
+	@Override
+	public int delete(BoardVO boardVO) throws Exception {
+		return boardDAO.delete(boardVO);
+	}
+
+	
 
 }

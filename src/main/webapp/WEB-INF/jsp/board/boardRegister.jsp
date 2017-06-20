@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:set var="registerFlag" value="${empty boardVO.no ? 'I' : 'U'}"/>
+<c:set var="registerFlag" value="${empty boardVO.no ? 'I' : empty boardVO.no == 'U' ? 'U' : 'D'}"/>
 <title>게시판페이지</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -16,6 +16,9 @@ $(document).ready(function(){
 	});
 	$('#update').click(function(){
 		$('#form').attr("action","/board/update.do").submit();
+	});
+	$('#delete').click(function(){
+		$('#form').attr("action","/board/delete.do").submit();
 	});
 });
 </script>
@@ -47,7 +50,9 @@ $(document).ready(function(){
 			<tr>
 				<c:if test="${registerFlag == 'I' }"><td colspan="2" style="text-align: center;"><input type="button" value="등록" id="insert" ></td></c:if>
 				<c:if test="${registerFlag == 'U' }"><td colspan="2" style="text-align: center;"><input type="button" value="수정" id="update" ></td></c:if>
-				<c:if test="${registerFlag == 'D' }"><td colspan="2" style="text-align: center;"><input type="button" value="수정" id="delete" ></td></c:if>
+			</tr>
+			<tr>
+				<td><c:if test="${registerFlag == 'U' }"><td colspan="2" style="text-align: center;"><input type="button" value="삭제" id="delete" ></td></c:if></td>
 			</tr>
 		</tbody>
 	</table>

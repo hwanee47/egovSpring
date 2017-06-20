@@ -4,6 +4,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="boardVO" type="project.board.vo.BoardVO"/>
+		<typeAlias alias="searchVO" type="project.board.vo.SearchVO"/>
 	</typeAliases>
 </configuration>
 

@@ -21,6 +21,17 @@
         	<bean class="project.common.LoggerInterceptor"/> <!-- HandlerInterceptor 인터페이스를 구현한 클래스 -->
     	</mvc:interceptor>
      </mvc:interceptors>
+     
+     <!-- For Pagination Tag -->	 
+	<bean id="textRenderer" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationRenderer"/>
+ 
+	<bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+		<property name="rendererType">
+			<map>
+				<entry key="text" value-ref="textRenderer"/>
+			</map>
+		</property>
+	</bean>
 
 
 
