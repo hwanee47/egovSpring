@@ -11,7 +11,7 @@ import project.board.vo.SearchVO;
 @Repository("boardDAO")
 public class BoardDAO extends EgovAbstractMapper{
 	
-	public List<BoardVO> list(SearchVO searchVO) throws Exception{
+	public List<?> list(SearchVO searchVO) throws Exception{
 		return list("board.list", searchVO);
 	}
 	

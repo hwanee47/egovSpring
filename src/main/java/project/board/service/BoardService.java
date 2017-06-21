@@ -7,7 +7,7 @@ import project.board.vo.SearchVO;
 
 public interface BoardService {
 
-	public List<BoardVO> list(SearchVO searchVO) throws Exception;
+	public List<?> list(SearchVO searchVO) throws Exception;
 
 	public int insert(BoardVO boardVO)  throws Exception;
 

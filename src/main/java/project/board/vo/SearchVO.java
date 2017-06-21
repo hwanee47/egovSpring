@@ -17,8 +17,6 @@ public class SearchVO implements Serializable {
 	/** 검색Keyword */
 	private String searchKeyword = "";
 
-	/** 검색사용여부 */
-	private String searchUseYn = "";
 
 	/** 현재페이지 */
 	private int pageIndex = 1;
@@ -76,14 +74,6 @@ public class SearchVO implements Serializable {
 
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
-	}
-
-	public String getSearchUseYn() {
-		return searchUseYn;
-	}
-
-	public void setSearchUseYn(String searchUseYn) {
-		this.searchUseYn = searchUseYn;
 	}
 
 	public int getPageIndex() {

@@ -2,20 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 
-	<select id="list" parameterType="searchVO" resultType="searchVO">
+	<select id="list" parameterType="searchVO" resultType="boardVO">
 		select NO as no,
 			   SUBJECT as subject,
 			   CONTENT as content,
 			   CREATED as creatEd
 		FROM BOARD
 		WHERE 1=1
-		order by NO
+		<if test="searchKeyword != null and searchKeyword != ''">
+	        <choose>
+	            <when test="searchCondition == 'subject'">
+					AND	SUBJECT LIKE CONCAT('%',#{searchKeyword},'%') 
+				</when>
+	            <when test="searchCondition == 'content'">
+					AND	CONTENT LIKE CONCAT('%',#{searchKeyword},'%') 
+				</when>
+			</choose>
+		</if>
+		order by NO DESC
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
-	<select id="ListTotCnt" parameterType="searchVO" resultType="searchVO">
+	<select id="ListTotCnt" parameterType="searchVO" resultType="int">
 		select count(*) totcnt
 		FROM BOARD
+		WHERE 1=1 
+		<if test="searchKeyword != null and searchKeyword != ''">
+	        <choose>
+	            <when test="searchCondition == 'subject'">
+					AND	SUBJECT LIKE CONCAT('%',#{searchKeyword},'%') 
+				</when>
+	            <when test="searchCondition == 'content'">
+					AND	CONTENT LIKE CONCAT('%',#{searchKeyword},'%') 
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	<insert id="insert" parameterType="boardVO">
@@ -36,13 +57,13 @@
 		UPDATE BOARD
 		SET SUBJECT = #{subject},
 			CONTENT = #{content}
-		WHERE NO = ${no}
+		WHERE NO = #{no}
 	</update>
 	
 	<delete id="delete" parameterType="boardVO">
 		DELETE
 		FROM BOARD
-		WHERE no = ${no}
+		WHERE no = #{no}
 	</delete>
 	
 	
