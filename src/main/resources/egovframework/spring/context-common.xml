@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
+	
+	<!-- CookieLocaleResolver : 쿠키를 이용한 locale정보 사용 
+	     SessionLocaleResolver : 세션을 이용한 locale정보 사용 
+	     AcceptHeaderLocaleResolver : 클라이언트의 브라우져에 설정된 locale정보 사용 
+	      Bean 설정 파일에 정의하지 않을 경우 AcceptHeaderLocaleResolver 를 default 로 적용된다. -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" >
+		<property name="defaultLocale" value="ko" />
+	</bean>
+	<!-- 사용자의 브라우져의 Locale 정보를 이용하지 않고 사용자가 선택하여 언어를 직접 선택할 수 있도록 구현하려 한다면 
+	     CookieLocaleResolver 나 SessionLocaleResolver 를 이용한다.
+                     먼저 다국어를 지원해야 하므로 메세지를 MessageSource 로 추출하여 구현해야 한다. -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:/egovframework/message/message-common</value> <!-- 파일경로 -->
+			</list>
+		</property>
+		<property name="cacheSeconds">
+			<value>60</value>
+		</property>
+	</bean>
+    
+</beans>
+	

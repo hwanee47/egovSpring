@@ -1,5 +1,19 @@
 package project.board.vo;
 
+/**
+
+* 1. 패키지명 : project.board.vo
+
+* 2. 타입명 : BoardVO.java
+
+* 3. 작성일 : 2017. 6. 23. 오전 9:32:09
+
+* 4. 작성자 : kim
+
+* 5. 설명 : 게시판 용도
+
+
+*/
 public class BoardVO {
 	private String no;
 	private String subject;

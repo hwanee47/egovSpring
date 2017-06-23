@@ -20,6 +20,12 @@
         	<mvc:mapping path="/**" /> <!-- 모든 URL 에 대해 Interceptor 를 적용하고자 한다면 /** -->
         	<bean class="project.common.LoggerInterceptor"/> <!-- HandlerInterceptor 인터페이스를 구현한 클래스 -->
     	</mvc:interceptor>
+    	<mvc:interceptor>
+			<mvc:mapping path="/**" /> <!-- 다국어 설정 -->
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="lang" />
+			</bean>
+		</mvc:interceptor>
      </mvc:interceptors>
      
      <!-- For Pagination Tag -->	 
@@ -32,7 +38,8 @@
 			</map>
 		</property>
 	</bean>
-
+	
+	
 
 
 		                

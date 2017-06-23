@@ -40,10 +40,10 @@ function link_page(pageNo){
 	</colgroup>
 	<tbody>
 	<tr>
-		<th>번호</th>
-		<th>제목</th>
-		<th>내용</th>
-		<th>날짜</th>
+		<th>NO</th>
+		<th><spring:message code="board.subject"/></th>
+		<th><spring:message code="board.content"/></th>
+		<th><spring:message code="board.date"/></th>
 	</tr>
 		<c:forEach var="list" items="${list}">
 		<tr>
@@ -55,22 +55,22 @@ function link_page(pageNo){
 		</tr>
 		</c:forEach>
 		<tr>
-			<td colspan="4" style="text-align: center;"><input type="button" class="btn btn-primary" value="글쓰기" id="write" ></td>
+			<td colspan="4" style="text-align: center;"><input type="button" class="btn btn-primary" value="<spring:message code="button.insert"/>" id="write" ></td>
 		</tr>
 		<tr>
 			<td colspan="4" style="text-align: center;">
 			<div class="row">
 			  <div class="col-xs-6 col-md-4">
 					<select name="searchCondition"  class="form-control">
-					<option value="subject" <c:if test="${searchVO.searchCondition  == 'subject'}"> selected </c:if>>제목</option>
-					<option value="content" <c:if test="${searchVO.searchCondition  == 'content'}"> selected </c:if>>내용</option>
+					<option value="subject" <c:if test="${searchVO.searchCondition  == 'subject'}"> selected </c:if>><spring:message code="board.subject"/></option>
+					<option value="content" <c:if test="${searchVO.searchCondition  == 'content'}"> selected </c:if>><spring:message code="board.content"/></option>
 					</select>
 			  </div>
 			  <div class="col-xs-6 col-md-4">
 				<input type="text" name="searchKeyword" id="searchKeyword" class="form-control" value="${searchVO.searchKeyword}"/>
 		      </div>
 			  <div class="col-xs-6 col-md-4">
-				<input type="button" name="searchList" id="searchList" class="btn btn-default" value="검색"/>	
+				<input type="button" name="searchList" id="searchList" class="btn btn-default" value="<spring:message code="button.search"/>"/>	
 			  </div>
 			</div>
 			</td>

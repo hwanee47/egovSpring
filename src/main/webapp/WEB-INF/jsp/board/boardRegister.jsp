@@ -15,18 +15,18 @@
 $(document).ready(function(){
 	$('#insert').click(function(){
 		if($.trim($('#subject').val()) == "" ){
-			alert('제목을 입력해주세요.');
+			alert('<spring:message code="subject.null"/>');
 		}else if($.trim($('#content').val()) == "" ){
-			alert('내용을 입력해주세요.');
+			alert('<spring:message code="content.null"/>');
 		}else{
 			$('#form').attr("action","/board/insert.do").submit();
 		}
 	});
 	$('#update').click(function(){
 		if($.trim($('#subject').val()) == "" ){
-			alert('제목을 입력해주세요.');
+			alert('<spring:message code="subject.null"/>');
 		}else if($.trim($('#content').val()) == "" ){
-			alert('내용을 입력해주세요.');
+			alert('<spring:message code="content.null"/>');
 		}else{
 			$('#form').attr("action","/board/update.do").submit();
 		}
@@ -46,26 +46,26 @@ $(document).ready(function(){
 		</colgroup>
 		<tbody>
 			<tr>
-				<td>번호</td> 
+				<td>NO</td> 
 				<td><input type="text" class="form-control" readOnly name="no" id="no" value='<c:if test="${boardVO.no ne null}">${boardVO.no}</c:if>'/></td>
 			</tr>
 			<tr>
-				<td>제목</td>
+				<td><spring:message code="board.subject"/></td>
 				<td><input type="text" class="form-control" name="subject" id="subject" value="<c:if test="${boardVO.subject ne null}">${boardVO.subject}</c:if>"/></td>
 			</tr>
 			<tr>
-				<td>내용</td>
+				<td><spring:message code="board.content"/></td>
 				<td><input type="text" class="form-control" name="content" id="content" value="<c:if test="${boardVO.content ne null}">${boardVO.content}</c:if>"/></td>
 			</tr>
 			<tr>
-				<td>날짜</td>
+				<td><spring:message code="board.date"/></td>
 				<td><input type="text" class="form-control" readOnly name="creatEd" id="creatEd" value="<c:if test="${boardVO.creatEd ne null}">${boardVO.creatEd}</c:if>"/></td>
 			</tr>
 			<tr>
-				<c:if test="${registerFlag == 'I' }"><td colspan="2" style="text-align: center;"><input type="button" class="btn btn-default" value="등록" id="insert" ></td></c:if>
+				<c:if test="${registerFlag == 'I' }"><td colspan="2" style="text-align: center;"><input type="button" class="btn btn-default" value="<spring:message code="button.create"/>" id="insert" ></td></c:if>
 				<c:if test="${registerFlag == 'U' }">
-				<td colspan="2" style="text-align: center;"><input type="button" class="btn btn-primary" value="수정" id="update" >
-				<input type="button" class="btn btn-danger" value="삭제" id="delete" >	
+				<td colspan="2" style="text-align: center;"><input type="button" class="btn btn-primary" value="<spring:message code="button.modify"/>" id="update" >
+				<input type="button" class="btn btn-danger" value="<spring:message code="button.delete"/>" id="delete" >	
 				</td></c:if>
 			</tr>
 			<tr>

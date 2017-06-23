@@ -4,6 +4,20 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+
+* 1. 패키지명 : project.board.vo
+
+* 2. 타입명 : SearchVO.java
+
+* 3. 작성일 : 2017. 6. 23. 오전 9:31:42
+
+* 4. 작성자 : kim
+
+* 5. 설명 : 검색조건 용도
+
+
+*/
 public class SearchVO implements Serializable {
 
 	/**
