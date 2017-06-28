@@ -116,7 +116,6 @@ public class BoardController {
 	*/
 	@RequestMapping(value = "/insert.do", method = RequestMethod.GET)
 	public String getBoardinfo(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model) throws Exception{
-		
 		return "board/boardRegister";
 	}
 	
@@ -137,10 +136,11 @@ public class BoardController {
 	
 	*/
 	@RequestMapping(value = "/insert.do", method = RequestMethod.POST)
-	public String insertBoardData(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model) throws Exception{
+	public String insertBoardData(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model, SearchVO searchVO) throws Exception{
 		BoardVO BoardVO = new BoardVO();
 		int val = boardService.insert(boardVO);
-		return "redirect:/board/list.do";
+		
+		return "forward:/board/list.do";
 	}
 	
 	/**
@@ -166,6 +166,7 @@ public class BoardController {
 		select.setNo(no);
 		BoardVO detail = boardService.updateView(select);
 		model.addAttribute("boardVO",detail);
+		
 		return "board/boardRegister";
 	}
 	
@@ -186,9 +187,13 @@ public class BoardController {
 	
 	*/
 	@RequestMapping(value="/update.do", method = RequestMethod.POST)
-	public String updateBoardData(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model)throws Exception{
+	public String updateBoardData(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model, SearchVO searchVO)throws Exception{
 		int val = boardService.update(boardVO);
-		return "redirect:/board/list.do";
+		
+		List<?> list = boardService.list(searchVO);
+		model.addAttribute("list", list);
+		
+		return "forward:/board/list.do";
 	}
 	
 	/**
@@ -208,9 +213,13 @@ public class BoardController {
 	
 	*/
 	@RequestMapping(value="/delete.do", method = RequestMethod.POST)
-	public String deleteBoardData(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model)throws Exception{
+	public String deleteBoardData(@ModelAttribute("boardVO") BoardVO boardVO, ModelMap model, SearchVO searchVO)throws Exception{
 		int val = boardService.delete(boardVO);
-		return "redirect:/board/list.do";
+		
+		List<?> list = boardService.list(searchVO);
+		model.addAttribute("list", list);
+		
+		return "forward:/board/list.do";
 	}
 
 	
