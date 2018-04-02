@@ -19,7 +19,7 @@ $(document).ready(function(){
 		}else if($.trim($('#content').val()) == "" ){
 			alert('<spring:message code="content.null"/>');
 		}else{
-			$('#form').attr("action","/board/insert.do").submit();
+			$('#form').attr("action","/project/board/insert.do").submit();
 		}
 	});
 	$('#update').click(function(){
@@ -28,11 +28,11 @@ $(document).ready(function(){
 		}else if($.trim($('#content').val()) == "" ){
 			alert('<spring:message code="content.null"/>');
 		}else{
-			$('#form').attr("action","/board/update.do").submit();
+			$('#form').attr("action","/project/board/update.do").submit();
 		}
 	});
 	$('#delete').click(function(){
-		$('#form').attr("action","/board/delete.do").submit();
+		$('#form').attr("action","/project/board/delete.do").submit();
 	});
 });
 </script>

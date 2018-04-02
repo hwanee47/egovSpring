@@ -14,18 +14,18 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#write').click(function(){
-		location.href="/board/insert.do";
+		location.href="/project/board/insert.do";
 	});
 	$('#searchList').click(function(){
-		$('#form').attr("action","/board/list.do").submit();
+		$('#form').attr("action","/project/board/list.do").submit();
 	});
 });
 function select(no){
-	location.href="/board/update.do?no="+no;
+	location.href="/project/board/update.do?no="+no;
 }
 function link_page(pageNo){
 	$('#pageIndex').val(pageNo);
-	$('#form').attr("action","/board/list.do").submit();
+	$('#form').attr("action","/project/board/list.do").submit();
 }
 </script>
 </head>
